@@ -43,7 +43,7 @@ It calculates:
 
 ![App Screenshot](image.png)
 
-> *(Optional — add a screenshot of the app in use)*
+ 
 
 ---
 
