@@ -15,7 +15,8 @@ Built with:
 
 ## 🚀 Live Demo
 
-👉 [Click here to try the app](https://predict-exam-ai.onrender.com/)  
+🔗 [(https://predict-exam-ai.onrender.com/](https://predict-exam-ai.onrender.com/)
+
  
 
 ---
