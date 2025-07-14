@@ -15,8 +15,8 @@ Built with:
 
 ## 🚀 Live Demo
 
-👉 [Click here to try the app](https://your-render-url.onrender.com)  
-> Replace with your actual link after deployment.
+👉 [Click here to try the app](https://predict-exam-ai.onrender.com/)  
+ 
 
 ---
 
