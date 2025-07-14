@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Exam Predictor</title>
+    <!-- Bootstrap 5 CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+<div class="container mt-5">
+    <!-- ✅ OUTSIDE the card: Display Prediction Result -->
+
+
+    <!-- 🎓 Main Card -->
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+
+            <div class="card shadow-lg">
+                <div class="card-header text-center bg-primary text-white d-flex justify-content-center align-items-center" style="flex-direction:column">
+                    <div style="background-color:white;border-radius:50%;width:fit-content;padding:15px">
+
+
+                      <svg height="50" width="50" viewBox="-9 0 274 274" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" fill="#000000">
+                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                            <g id="SVGRepo_iconCarrier">
+                                <g>
+                                    <path
+                                        d="M191.54779,186.292389 L191.607285,246.81213 L137.903038,273.611369 L137.903038,213.11807 L191.54779,186.292389 Z M256.000818,153.946885 L256.000818,214.678164 L210.196199,237.537504 L210.163146,177.083869 L256.000818,153.946885 Z M191.468463,105.286501 L191.527958,165.171627 L137.903038,191.818823 L137.903038,131.913865 L191.468463,105.286501 Z M256.000818,73.2054191 L256.000818,132.713743 L210.149925,156.022603 L210.110262,96.0184858 L256.000818,73.2054191 Z M129.738988,66.1651652 L177.67221,90.3598405 L127.940914,115.334563 L80.9133402,91.7150067 L129.738988,66.1651652 Z M63.0648093,32.5107686 L108.783491,55.588258 L59.8454631,81.1314889 L12.8906057,57.5515964 L63.0648093,32.5107686 Z M193.755719,32.8611286 L242.997833,57.5515964 L198.958235,79.6705536 L150.925855,55.4428255 L193.755719,32.8611286 Z M128.231779,3.55271368e-15 L172.562241,22.2247263 L130.056295,44.9188028 L84.3772773,21.8809768 L128.231779,3.55271368e-15 Z"
+                                        fill="#17a6ee"> </path>
+                                    <path
+                                        d="M118.943932,131.913865 L82.7709095,113.728195 L82.7709095,192.334447 C82.7709095,192.334447 38.5329951,98.2065835 34.4344436,89.7516683 C33.9055982,88.6609247 31.7307216,87.4644121 31.175434,87.1735472 C23.2427536,83.0088899 0,71.2354701 0,71.2354701 L0,210.110262 L32.1537979,227.297736 L32.1537979,154.7071 C32.1537979,154.7071 75.9223621,238.813344 76.3652701,239.732213 C76.8081781,240.651081 81.2042052,249.515852 85.8977077,252.629429 C92.1513041,256.767644 118.950543,272.884206 118.950543,272.884206 L118.943932,131.913865 Z"
+                                        fill="#154cc1"> </path>
+                                </g>
+                            </g>
+                        </svg> </div>  <h3>Student Exam Result Predictor</h3>
+
+                </div>
+                <div class="card-body">
+
+                    <form method="POST" action="/predict">
+                        <div class="mb-3">
+                            <label class="form-label">Study Hours:</label>
+                            <input type="number" name="study_hours" step="0.1" class="form-control" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Previous Grade (0–100):</label>
+                            <input type="number" name="previous_grade" step="0.1" class="form-control" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Quiz Total Items (Admin sets):</label>
+                            <input type="number" name="quiz_total" class="form-control" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Correct Answers:</label>
+                            <input type="number" name="quiz_correct" class="form-control" required>
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-success">Predict</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+      {% if prediction %}
+
+     <div class="row justify-content-center mt-1">
+
+         <div class="col-md-6">
+             <div style="font-weight:bold;font-size:20px">Result of Exam Score Prediction</div>
+      <div class="alert {% if 'Passed' in prediction %}alert-success{% else %}alert-danger{% endif %} text-center fs-5">
+        <strong>{{ prediction }}</strong><br><br>
+
+        <p class="mb-1"><strong>Input Summary:</strong></p>
+        <p>Study Hours: <strong>{{ study_hours }}</strong></p>
+        <p>Previous Grade: <strong>{{ previous_grade }}</strong></p>
+        <p>Quiz Total Items: <strong>{{ quiz_total }}</strong></p>
+        <p>Correct Answers: <strong>{{ quiz_correct }}</strong></p>
+        <p>Quiz Score: <strong>{{ quiz_score }}%</strong></p>
+        <hr>
+        <p>Probability of Passing: <strong>{{ pass_pct }}%</strong></p>
+        <p>Probability of Failing: <strong>{{ fail_pct }}%</strong></p>
+        <p>Overall Score: <strong>{{ (score * 100) | round(2) }}%</strong></p>
+    </div>
+        </div>
+     </div>
+    {% endif %}
+</div>
+
+</body>
+</html>
