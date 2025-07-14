@@ -42,7 +42,8 @@ It calculates:
 
 ## 📸 Screenshot
 
-![App Screenshot](image.png)
+![App Screenshot_1](screenshot1.png)
+![App Screenshot_2](screenshot2.png)
 
  
 
